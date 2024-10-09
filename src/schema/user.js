@@ -26,6 +26,6 @@ const userSchema = new mongoose.Schema({
     }
 }, { timestamps: true }); //created_at an updated_at always created when a user is created
 
-const user = mongoose.model("User", userSchema);
+const User = mongoose.model("User", userSchema);
 
-export default user;
+export default User;
