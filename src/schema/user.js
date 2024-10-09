@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-        minLength: 8 
+        minLength: 8
     }
 }, { timestamps: true }); //created_at an updated_at always created when a user is created
 
