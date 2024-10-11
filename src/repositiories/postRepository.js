@@ -1,4 +1,4 @@
-import Post from "../schema/posts";
+import Post from "../schema/posts.js";
 
 export const createPost = async (caption, image, user) => {
     try {

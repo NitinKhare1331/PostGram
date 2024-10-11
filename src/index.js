@@ -1,6 +1,11 @@
 import express from "express";
 import connectDB from "./config/dbConfig.js";
-import { createPost } from "./controllers/postController.js";
+import createPost from "./controllers/createPostController.js";
+// import upload from "./config/multerCloudinaryConfig.js";
+// import { S3uploader } from "./config/multerS3Config.js";
+
+import router from './controllers/createPostController.js'
+import upload from "./config/multerCloudinaryConfig.js";
 
 const PORT = 3000;
 
@@ -39,7 +44,9 @@ app.get('/ping', (req, res) => {
 //     next();
 // }
 
-app.post('/posts', createPost);
+app.post('/posts',upload.single('image') , createPost);
+
+// app.post('/posts', S3uploader.single('image'), createPost);
 
 app.listen(PORT, ()=> {
     console.log(`Server is running on ${PORT}`);
