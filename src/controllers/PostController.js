@@ -1,5 +1,6 @@
 import cloudinary from "../config/cloudinaryConfig.js"
 import { CreatePost } from "../services/postService.js";
+import { getAllPostService } from "../services/postService.js";
 // export async function createPost(req, res) {
 //     //call the service layer
 //     return res.json({message: 'Post created successfully'})
@@ -19,7 +20,7 @@ function uploadToCloudinary(filePath) {
     });
 }
 
-async function createPost(req, res) {
+export async function createPost(req, res) {
     try {
         // Check if the file exists in the request
         if (!req.file) {
@@ -57,7 +58,27 @@ async function createPost(req, res) {
     }
 }
 
-export default createPost;
+export async function getAllPosts(req, res) {
+    try {        
+        const limit = req.query.limit || 10;
+        const offset = req.query.offset || 0;
+        
+        const paginatedPost = await getAllPostService(offset, limit);        
+
+        return res.status(200).json({
+            success: true,
+            message: 'All post fetched successfully',
+            data: paginatedPost
+        })
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            success: false,
+            message: 'Internal server error'
+        })
+    }
+}
+
 
 
 

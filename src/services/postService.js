@@ -1,4 +1,4 @@
-import { createPost, deletePost, findAllPost } from "../repositiories/postRepository.js";
+import { countAllPosts, createPost, deletePost, findAllPosts } from "../repositiories/postRepository.js";
 
 export const CreatePost = async (createPostObject) => {
     // 1. Take the image of the post and upload on aws
@@ -17,14 +17,21 @@ export const CreatePost = async (createPostObject) => {
 
 }
 
-export const DeletePost = async (deletePostObject) => {
-    const id = deletePostObject.id;
+// export const DeletePostService = async (deletePostObject) => {
+//     const id = deletePostObject.id;
 
-    const postDel = await deletePost(id);
-    return postDel;
-}
+//     const postDel = await deletePost(id);
+//     return postDel;
+// }
 
-export const FindAll = async () => {
-    const allPost = await findAllPost();
-    return allPost;
+export const getAllPostService = async (offset,limit) => {
+    const posts = await findAllPosts(offset, limit);
+
+    //calculate total number of post and total number of pages
+    const totalDocuments = countAllPosts();
+    const totalPages = Math.ceil(totalDocuments / limit);
+
+    return {
+        posts, totalPages, totalDocuments
+    };
 }

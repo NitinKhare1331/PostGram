@@ -3,11 +3,13 @@
 
 import express from 'express';
 import upload from '../../config/multerCloudinaryConfig.js';
-import createPost from '../../controllers/createPostController.js';
+import { getAllPosts, createPost } from '../../controllers/PostController.js';
 
 const router = express.Router(); //Router object to modularize the route
 
-export const postRouter = router.post('/', upload.single('image'), createPost);
+router.post('/', upload.single('image'), createPost);
 
-// export default router;
+router.get('/', getAllPosts);
+
+export default router;
 
