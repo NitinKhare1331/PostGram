@@ -1,4 +1,4 @@
-import { createPost } from "../repositiories/postRepository.js";
+import { createPost, deletePost, findAllPost } from "../repositiories/postRepository.js";
 
 export const CreatePost = async (createPostObject) => {
     // 1. Take the image of the post and upload on aws
@@ -15,4 +15,16 @@ export const CreatePost = async (createPostObject) => {
     const post = await createPost(caption, image);
     return post;
 
+}
+
+export const DeletePost = async (deletePostObject) => {
+    const id = deletePostObject.id;
+
+    const postDel = await deletePost(id);
+    return postDel;
+}
+
+export const FindAll = async () => {
+    const allPost = await findAllPost();
+    return allPost;
 }
