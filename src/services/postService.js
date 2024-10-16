@@ -1,4 +1,4 @@
-import { countAllPosts, createPost, deletePost, findAllPosts } from "../repositiories/postRepository.js";
+import { countAllPosts, createPost, deletePostById, findAllPosts, updatePostById } from "../repositiories/postRepository.js";
 
 export const CreatePost = async (createPostObject) => {
     // 1. Take the image of the post and upload on aws
@@ -17,12 +17,10 @@ export const CreatePost = async (createPostObject) => {
 
 }
 
-// export const DeletePostService = async (deletePostObject) => {
-//     const id = deletePostObject.id;
-
-//     const postDel = await deletePost(id);
-//     return postDel;
-// }
+export const deletePostService = async (id) => {
+    const response = await deletePostById(id);
+    return response;
+}
 
 export const getAllPostService = async (offset,limit) => {
     const posts = await findAllPosts(offset, limit);
@@ -34,4 +32,9 @@ export const getAllPostService = async (offset,limit) => {
     return {
         posts, totalPages, totalDocuments
     };
+}
+
+export const updatePostService = async (id, updateObject) => {
+    const response = await updatePostById(id, updateObject);
+    return response;
 }

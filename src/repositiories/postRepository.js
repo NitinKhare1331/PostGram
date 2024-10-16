@@ -42,12 +42,21 @@ export const findPostById = async (id) => {
     }
 }
 
-export const deletePost = async (id) => {
+export const deletePostById = async (id) => {
     try {
         const post = await Post.findByIdAndDelete(id);
         return post;
     }
     catch(error) {
+        console.log(error);
+    }
+}
+
+export const updatePostById = async (id, updateObject) => {
+    try {
+        const post = await Post.findByIdAndUpdate(id, updateObject, { new: true });
+        return post;
+    } catch (error) {
         console.log(error);
     }
 }
